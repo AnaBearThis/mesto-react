@@ -11,23 +11,23 @@ function App() {
     const [isEditProfilePopupOpen, setEditProfilePopupOpen] = React.useState(false);
     const [isAddPlacePopupOpen, setAddPlacePopupOpen] = React.useState(false);
     const [isCardViewPopupOpen, setCardViewPopupOpen] = React.useState(false);
-    const [selectedCard, setSelectedCard] = React.useState('');
+    const [selectedCard, setSelectedCard] = React.useState([]);
 
     function handleEditAvatarClick() {
-        setEditAvatarPopupOpen(!isEditAvatarPopupOpen);
+        setEditAvatarPopupOpen(true);
     };
 
     function handleEditProfileClick() {
-        setEditProfilePopupOpen(!isEditProfilePopupOpen);
+        setEditProfilePopupOpen(true);
     };
 
     function handleAddPlaceClick() {
-        setAddPlacePopupOpen(!isAddPlacePopupOpen);
+        setAddPlacePopupOpen(true);
     };
 
     function handleCardClick(evt) {
-        setCardViewPopupOpen(!isCardViewPopupOpen);
-        setSelectedCard(evt.link);
+        setCardViewPopupOpen(true);
+        setSelectedCard(evt);
     }
 
     function closeAllPopups() {
@@ -35,16 +35,27 @@ function App() {
         setEditProfilePopupOpen(false);
         setAddPlacePopupOpen(false);
         setCardViewPopupOpen(false);
-        setSelectedCard('');
+        setSelectedCard([]);
     };
 
     return (
         <div className='page'>
         <div className="content">
             <Header/>
-            <Main onEditAvatar={handleEditAvatarClick} onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onCardClick={handleCardClick}/>
+            <Main
+                onEditAvatar={handleEditAvatarClick}
+                onEditProfile={handleEditProfileClick}
+                onAddPlace={handleAddPlaceClick}
+                onCardClick={handleCardClick}
+            />
             <Footer/>
-            <PopupWithForm title='Обновить аватар' name='change-av' textButton='Сохранить' isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups}>
+            <PopupWithForm
+                title='Обновить аватар'
+                name='change-av'
+                textButton='Сохранить'
+                isOpen={isEditAvatarPopupOpen}
+                onClose={closeAllPopups}
+            >
                 <input
                     id="input-link-av"
                     type="url"
@@ -55,7 +66,13 @@ function App() {
                 />
                 <span id="input-link-av-error" className="popup__error"></span>
             </PopupWithForm>
-            <PopupWithForm title='Редактировать проофиль' name='edit' textButton='Сохранить' isOpen={isEditProfilePopupOpen} onClose={closeAllPopups}>
+            <PopupWithForm
+                title='Редактировать профиль'
+                name='edit'
+                textButton='Сохранить'
+                isOpen={isEditProfilePopupOpen}
+                onClose={closeAllPopups}
+            >
                 <input
                     id="input-name"
                     type="text"
@@ -79,7 +96,13 @@ function App() {
                 />
                 <span id="input-job-error" className="popup__error"></span>
             </PopupWithForm>
-            <PopupWithForm title='Новое место' name='add' textButton='Создать' isOpen={isAddPlacePopupOpen} onClose={closeAllPopups}>
+            <PopupWithForm
+                title='Новое место'
+                name='add'
+                textButton='Создать'
+                isOpen={isAddPlacePopupOpen}
+                onClose={closeAllPopups}
+            >
                 <input
                     id="input-place"
                     type="text"
@@ -101,8 +124,15 @@ function App() {
                 />
                 <span id="input-link-error" className="popup__error"></span>
             </PopupWithForm>
-            <PopupWithForm title='Вы уверены?' name='submit' textButton='Да'></PopupWithForm>
-            <ImagePopup onClose={closeAllPopups} card={selectedCard}/>
+            <PopupWithForm
+                title='Вы уверены?'
+                name='submit'
+                textButton='Да'
+            ></PopupWithForm>
+            <ImagePopup
+                onClose={closeAllPopups}
+                card={selectedCard}
+            />
         </div>
         </div>  
     );

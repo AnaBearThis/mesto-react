@@ -3,9 +3,9 @@ import Card from "./Card.js";
 import React from 'react';
 
 function Main(props) {
-    const [userName, setUserName] = React.useState();
-    const [userDescription, setUserDescription] = React.useState();
-    const [userAvatar, setUserAvatar] = React.useState();
+    const [userName, setUserName] = React.useState('');
+    const [userDescription, setUserDescription] = React.useState('');
+    const [userAvatar, setUserAvatar] = React.useState('');
     const [cards, setCards] = React.useState([]);
 
     React.useEffect(() => {
@@ -44,10 +44,7 @@ function Main(props) {
               <section className="photos">
                   {
                     cards.map(card => (
-                        <Card 
-                            cardLink={card.link} 
-                            cardName={card.name}
-                            cardLikes={card.likes.length}
+                        <Card
                             key={card._id}
                             card={card}
                             onClick={props.onCardClick}
