@@ -39,7 +39,7 @@ class Api {
               })
         })
         .then((res) => {
-            return this._checkResponse(res)
+            return this._checkResponse(res);
          });
     }
 
@@ -67,24 +67,24 @@ class Api {
          });
     }
 
-    like(cardId) {
-        return fetch(`${this._url}/cards/${cardId}/likes`, {
-            method: 'PUT',
-            headers: this._headers
-        })
-        .then((res) => {
-            return this._checkResponse(res)
-         });
-    }
-
-    removeLike(cardId) {
-        return fetch(`${this._url}/cards/${cardId}/likes`, {
-            method: 'DELETE',
-            headers: this._headers
-        })
-        .then((res) => {
-            return this._checkResponse(res)
-         });
+    changeLikeCardStatus(cardId, checkLike) {
+        if (!checkLike) {
+            return fetch(`${this._url}/cards/${cardId}/likes`, {
+                method: 'PUT',
+                headers: this._headers
+            })
+            .then((res) => {
+                return this._checkResponse(res)
+             });
+        } else {
+            return fetch(`${this._url}/cards/${cardId}/likes`, {
+                method: 'DELETE',
+                headers: this._headers
+            })
+            .then((res) => {
+                return this._checkResponse(res)
+             });
+        }
     }
 
     changeAvatar(avatar) {
@@ -92,7 +92,7 @@ class Api {
             method: 'PATCH',
             headers: this._headers,
             body: JSON.stringify({
-                avatar: `${avatar.link}`
+                avatar: `${avatar}`
               })
         })
         .then((res) => {

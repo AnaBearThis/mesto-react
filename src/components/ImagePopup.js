@@ -1,5 +1,4 @@
 function ImagePopup(props) {
-    console.log(props.card.link);
     return (
         <div className={`popup popup_type_view ${props.card.link && 'popup_opened'}`}>
               <div className="popup__container popup__container_type_view">   
