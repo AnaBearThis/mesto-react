@@ -2,12 +2,12 @@ import '../index.css';
 import Header from './Header.js';
 import Main from './Main.js';
 import Footer from './Footer.js';
-import PopupWithForm from './PopupWithForm.js';
+//import PopupWithForm from './PopupWithForm.js';
 import EditProfilePopup from './EditProfilePopup.js';
 import EditAvatarPopup from './EditAvatarPopup.js'
 import AddPlacePopup from './AddPlacePopup.js';
 import ImagePopup from './ImagePopup.js';
-import { CurrentUserContext } from './CurrentUserContext.js';
+import { CurrentUserContext } from '../contexsts/CurrentUserContext.js';
 import api from "../utils/Api.js";
 import React from 'react';
 
@@ -16,7 +16,7 @@ function App() {
     const [isEditProfilePopupOpen, setEditProfilePopupOpen] = React.useState(false);
     const [isAddPlacePopupOpen, setAddPlacePopupOpen] = React.useState(false);
     const [isCardViewPopupOpen, setCardViewPopupOpen] = React.useState(false);
-    const [selectedCard, setSelectedCard] = React.useState([]);
+    const [selectedCard, setSelectedCard] = React.useState({name: '', link: ''});
     const [currentUser, setCurrentUser] = React.useState({});
     const [cards, setCards] = React.useState([]);
 
@@ -65,7 +65,7 @@ function App() {
         setEditProfilePopupOpen(false);
         setAddPlacePopupOpen(false);
         setCardViewPopupOpen(false);
-        setSelectedCard([]);
+        setSelectedCard({name: '', link: ''});
     };
 
     function handleCardLike(card) {
@@ -132,31 +132,31 @@ function App() {
     return (
         <CurrentUserContext.Provider value={currentUser}>
             <div className='page'>
-            <div className="content">
-                <Header/>
-                <Main
-                    onEditAvatar={handleEditAvatarClick}
-                    onEditProfile={handleEditProfileClick}
-                    onAddPlace={handleAddPlaceClick}
-                    cards={cards}
-                    onCardClick={handleCardClick}
-                    onCardLike={handleCardLike}
-                    onCardDelete={handleCardDelete}
-                />
-                <Footer/>
-                <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} />
-                <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
-                <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddNewPlace={handleAddPlaceSubmit} />
-                {/* <PopupWithForm
-                    title='Вы уверены?'
-                    name='submit'
-                    textButton='Да'
-                ></PopupWithForm> */}
-                <ImagePopup
-                    onClose={closeAllPopups}
-                    card={selectedCard}
-                />
-            </div>
+                <div className="content">
+                    <Header/>
+                    <Main
+                        onEditAvatar={handleEditAvatarClick}
+                        onEditProfile={handleEditProfileClick}
+                        onAddPlace={handleAddPlaceClick}
+                        cards={cards}
+                        onCardClick={handleCardClick}
+                        onCardLike={handleCardLike}
+                        onCardDelete={handleCardDelete}
+                    />
+                    <Footer/>
+                    <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} />
+                    <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
+                    <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddNewPlace={handleAddPlaceSubmit} />
+                    {/* <PopupWithForm
+                        title='Вы уверены?'
+                        name='submit'
+                        textButton='Да'
+                    ></PopupWithForm> */}
+                    <ImagePopup
+                        onClose={closeAllPopups}
+                        card={selectedCard}
+                    />
+                </div>
             </div>
         </CurrentUserContext.Provider>    
     );

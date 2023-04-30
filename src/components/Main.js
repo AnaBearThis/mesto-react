@@ -1,6 +1,5 @@
-import api from "../utils/Api.js";
 import Card from "./Card.js";
-import { CurrentUserContext } from "./CurrentUserContext.js";
+import { CurrentUserContext } from "../contexsts/CurrentUserContext.js";
 import React from 'react';
 
 function Main(props) {
